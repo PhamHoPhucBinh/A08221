@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>loop2 bai </title>
+</head>
+<body>
+<p>Nhap so tien</p>
+<input id="tiengui" type="number"/>
+<p>Nhap thoi gian gui (thang) </p>
+<input id="time" type="number"/>
+<p>Nhap % lai suat </p>
+<input id="laisuat" type="number"></input>
+<span>%</span></br>
+<button type="button" onclick="tinhlaisuat()" >Tinh lai suat</button>
+<p>so tien nhan duoc</p>
+<input type="number" id="nhanduoc" />
+
+
+<script>
+    function tinhlaisuat() {
+        let a = parseInt(document.getElementById("tiengui").value);
+        let b = parseInt(document.getElementById("time").value);
+        let c = parseInt(document.getElementById("laisuat").value);
+
+        for (i = 1; i <= b; i++) {
+            a +=c/100*a ;
+
+        }
+        document.getElementById("nhanduoc").value = a;
+    }
+</script>
+</body>
+</html>
