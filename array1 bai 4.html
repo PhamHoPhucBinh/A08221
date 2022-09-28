@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array1 bai 4</title>
+</head>
+<body>
+<p>nhap vao cac so nguyen to</p>
+<input type="number" id="add"/></br>
+<button onclick="add()" type="button">add</button></br>
+<button onclick="reverse()" type="button">reverse</button>
+<script>
+    let array = [];
+    function add() {
+
+        array.push(document.getElementById("add").value);
+        document.getElementById("add").value = '';
+        console.log(array)
+    }
+    function reverse() {
+        let first = 0;
+        let last = array.length - 1;
+        while (first < last) {
+            let array2 = array[first];
+            array[first] = array[last];
+            array[last] = array2;
+            first++;
+            last--;
+
+        }console.log(array);
+    }
+
+
+
+</script>
+</body>
+</html>

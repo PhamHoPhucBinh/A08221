@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array1 bai 7</title>
+</head>
+<body>
+<p>nhap vao cac so nguyen to</p>
+<input type="number" id="add"/></br>
+<button onclick="add()" id="buttonAdd" type="button">add</button></br>
+<input type="number" id="check"/>
+<button onclick="check()" type="button">check</button>
+<script>
+    let array = [];
+    let count = 0;
+    function add() {
+
+        array.push(document.getElementById("add").value);
+        document.getElementById("add").value = '';
+        console.log(array)
+        console.log(count);
+        count++;
+        if(count==10){
+            let inputAdd = document.getElementById("add");
+            inputAdd.setAttribute("type", "hidden");
+            alert("ban da nhap du 10 so");
+        }
+    }
+
+    function check() {
+        let v = document.getElementById("check").value;
+        for (i = 0; i < array.length; i++) {
+            if (v === array[i]) {
+                for (let j = 0; j < array.length-1 ; j++) {
+                    array[i] = array[i + 1];
+                }
+                array[array.length-1]=0
+            }
+        }
+        console.log(array);
+    }
+
+</script>
+</body>
+</html>
