@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>array1 bai 8</title>
+</head>
+<body>
+<input id="nhapvao" type="number">
+<button id="add" onclick="add()">add</button>
+<button onclick="b()">check</button>
+<p id="mang1"></p>
+<p id="mang2"></p>
+<script>
+    let daysonguyen = [];
+    // function add() {
+    //     if (daysonguyen.length < 3) {
+    //         daysonguyen.push(document.getElementById("nhapvao").value);
+    //         document.getElementById("nhapvao").value = "";
+    //         console.log(daysonguyen);
+    //     } else if (document.getElementById("nhapvao").value === "") {
+    //         alert("nhap lai 1 so");
+    //     } else {
+    //         document.getElementById("add").disabled = true;
+    //     }
+    // }
+
+    function add() {
+        if (document.getElementById("nhapvao").value === "") {
+            alert("nhap lai");
+        } else if (daysonguyen.length < 10) {
+            daysonguyen.push(parseInt(document.getElementById("nhapvao").value));
+            document.getElementById("nhapvao").value = "";
+            console.log(daysonguyen);
+            // document.getElementById("mang1").innerText = daysonguyen.join();
+        } else {
+            document.getElementById('add').value = true;
+        }
+    }
+    function b() {
+        for (let i = 0; i < daysonguyen.length; i++) {
+            for (let j = i + 1; j < daysonguyen.length; j++) {
+                if (daysonguyen[i] < daysonguyen[j]) {
+                    let min = daysonguyen[i];
+                    daysonguyen[i] = daysonguyen[j];
+                    daysonguyen[j] = min;
+                }
+            }
+        }
+        document.getElementById("mang2").innerText = daysonguyen.join();
+    }
+
+
+</script>
+</body>
+</html>
