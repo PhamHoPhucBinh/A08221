@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>function2 bai 8</title>
+</head>
+<body>
+<input id="songuyen" placeholder="nhap so nguyen bat ki"/>
+<button onclick="themsonguyen()">add</button>
+<p id="mangsonguyen"></p>
+<button onclick="daonguoc()">daonguoc</button>
+<script>
+
+    let arrayA = [];
+
+    function themsonguyen() {
+
+        let a = document.getElementById("songuyen").value;
+        if (isNaN(a)) {
+            alert("ban phai nhap so nguyen");
+            document.getElementById("songuyen").value = "";
+        } else {
+            arrayA.push(a);
+            document.getElementById("songuyen").value = "";
+            document.getElementById("mangsonguyen").innerText = arrayA;
+        }
+    }
+
+    function daonguoc() {
+        arrayA.reverse()
+        console.log(arrayA);
+        document.write(arrayA);
+    }
+
+
+</script>
+</body>
+</html>
