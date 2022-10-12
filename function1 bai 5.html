@@ -9,23 +9,26 @@
 
 <button onclick="myFunction()">Try it</button>
 <script>
-    function myFunction() {
-        let a = prompt("nhap vao ten ngoi sao");
-        let array1 = [ "Polaris", "Aldebaran", "Deneb", "Vega", "Altair", "Dubhe", "Regulus"];
-        let array2 = [ "Ursa_Minor", "Tarurus", "Cygnus", "Lyra", "Aquila", "Ursa_Major", "Leo"];
+    let array1 = ["Polaris", "Aldebaran", "Deneb", "Vega", "Altair", "Dubhe", "Regulus"];
+    let array2 = ["Ursa_Minor", "Tarurus", "Cygnus", "Lyra", "Aquila", "Ursa_Major", "Leo"];
+    let a = prompt("nhap vao ten ngoi sao");
+    myFunction(a);
 
-
+    function myFunction(str) {
 
         for (let i = 0; i < array1.length; i++) {
 
-            if (a == array1[i]) {
+            if (str == array1[i]) {
                 let b = array1.indexOf(array1[i]);
                 return alert(array2[b]);
+            }else if (str==array2[i]){
+                let b = array2.indexOf(array1[i]);
+                return alert(array1[i]);
             }
 
-            }
-        return alert("k ton tai");
         }
+        return alert("k ton tai");
+    }
 
 </script>
 </body>
