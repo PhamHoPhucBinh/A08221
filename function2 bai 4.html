@@ -11,12 +11,14 @@
 <input id="result" type="text" readonly/>
 
 <script>
-    let a  = document.getElementById("input").value ;
-    function check() {
-
-
-
-    }
+function isNum(a) {
+    return !isNaN(a);
+}
+function check() {
+    let str = document.getElementById("input").value;
+    document.getElementById("result").value = isNum(str);
+    document.getElementById("input").value = "";
+}
 </script>
 </body>
 </html>
