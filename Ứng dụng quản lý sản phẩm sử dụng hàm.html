@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ứng dụng quản lý sản phẩm sử dụng hàm</title>
+</head>
+<style>
+    table, th, td {
+        border: 1px solid #ccc;
+    }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+        cursor: pointer;
+    }
+
+</style>
+<body>
+<input type="text" id="name" placeholder="insert product's name ">
+<input type="text" id="brand" placeholder="insert product's brand">
+<input type="number" id="number" placeholder="insert number of product">
+<input type="button" onclick="addProduct()" value="ADD Product">
+<p id="result"></p>
+<script>
+    class Product {
+        constructor(name, brand, number) {
+            this.name = name;
+            this.brand = brand;
+            this.number = number;
+        }
+
+        setName(name) {
+            this.name = name;
+        }
+
+        setBrand(brand) {
+            this.brand = brand;
+        }
+
+        setNumber(number) {
+            this.number = number;
+        }
+
+        getName() {
+            return this.name;
+        }
+
+        getBrand() {
+            return this.brand;
+        }
+
+        getNumber() {
+            return this.number;
+        }
+    }
+
+    let productList = [];
+    let product1 = new Product("xperia", "sony", 19);
+    let product2 = new Product("Iphone11", "apple", 100);
+    let product3 = new Product("flip", "samsung", 88);
+    let product4 = new Product("fold", "samsung", 96);
+    productList.push(product1, product2, product3, product4);
+    display(productList);
+
+    function display(list) {
+        let sout = '<table>\n' +
+            '    <tr>\n' +
+            '        <th>ID</th>\n' +
+            '        <th>Product Name</th>\n' +
+            '        <th>Brand</th>\n' +
+            '        <th>Number of Product</th>\n' +
+            '    </tr>';
+        for (let i = 0; i < list.length; i++) {
+            sout += '<tr>\n' +
+                '<td>' + (i + 1) + '</td>' +
+                '<td>' + list[i].getName() + '</td>' +
+                '<td>' + list[i].getBrand() + '</td>' +
+                '<td>' + list[i].getNumber() + '</td>' +
+                '<td><input type="button" onclick="editProduct(' + i + ')" value="Edit">' + '</td>' +
+                '<td><input type="button" onclick="delProduct(' + i + ')" value="Delete">' + '</td>' +
+                '</tr>'
+        }
+        sout += '</table>';
+        document.getElementById("result").innerHTML = sout;
+    }
+
+    function addProduct() {
+        let name = document.getElementById("name").value;
+        let brand = document.getElementById("brand").value;
+        let number = document.getElementById("number").value;
+        let newData = new Product(name, brand, number);
+        if (name == "" || brand == "" || number == "") {
+            alert("provide all data pls");
+            document.getElementById("name").value = "";
+            document.getElementById("brand").value = "";
+            document.getElementById("number").value = "";
+            return false;
+        } else if (!isNaN(name) || !isNaN(brand)) {
+            alert("name or brand typed wrong")
+            document.getElementById("name").value = "";
+            document.getElementById("brand").value = "";
+            document.getElementById("number").value = "";
+            return false;
+        } else {
+            productList.push(newData);
+            display(productList);
+            alert("successfully")
+        }
+        document.getElementById("name").value = "";
+        document.getElementById("brand").value = "";
+        document.getElementById("number").value = "";
+    }
+
+    function editProduct(index) {
+        let newName = prompt("insert new Product's Name");
+        let newBrand = prompt("insert new Brand's Name");
+        let newNumber = parseInt(prompt("insert the Number of Product"));
+        if (newName == "" || newBrand == "" || newNumber == "") {
+            alert("pls provide all data");
+            return false;
+        } else if (!isNaN(newName) || !isNaN(newBrand) || isNaN(newNumber)) {
+            alert("wrong typed");
+            return false;
+        } else {
+            productList[index].setName(newName);
+            productList[index].setBrand(newBrand);
+            productList[index].setNumber(newNumber);
+            alert("edit sucessfully");
+            display(productList);
+        }
+    }
+
+    function delProduct(index) {
+        let conf = confirm("do u wanna del this data");
+        if (conf) {
+            productList.splice(index, 1);
+        } else {
+            alert("u do not del this data")
+        }
+        display(productList);
+    }
+</script>
+</body>
+</html>

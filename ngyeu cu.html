@@ -5,10 +5,19 @@
     <title>danh sach nguoi yeu cu</title>
 </head>
 <style>
-    table#t01 {
-        width: 100%;
-        background-color: #f1f1c1;
+    table, th, td {
+        border: 1px solid #ccc;
     }
+
+    table {
+        border-collapse: collapse;
+    }
+
+    tr:hover {
+        background-color: #ddd;
+        cursor: pointer;
+    }
+
 </style>
 <body>
 <input type="text" id="name" placeholder="insert your ex's name">
@@ -29,6 +38,7 @@
 
 
         setName(name) {
+
             this.name = name;
         }
 
@@ -89,7 +99,7 @@
                 '<td>' + list[i].getLocation() + '</td>' +
                 '<td>' + list[i].getTime() + '</td>' +
                 '<td><input type="button" onclick="edit(' + i + ')" value="Edit">' + '</td>' +
-                '<td><input type="button" value="Del" onclick="del(' + i + ')" " >' + '</td>' +
+                '<td><input type="button" onclick="del(' + i + ')" value="Delete">' + '</td>' +
                 '</tr>'
         }
         sout += '</table>';
@@ -97,37 +107,41 @@
 
     }
 
-
     function add() {
-        if (document.getElementById("name").value == "" || document.getElementById("age").value == ""
-            || document.getElementById("location").value == "") {
+        let name = document.getElementById("name").value;
+        let age = document.getElementById("age").value;
+        let location = document.getElementById("location").value;
+        let time = document.getElementById("time").value;
+        let newData = new ExGirlFriend(name, age, location, time);
+        if (name == "" || age == "" || location == "" || time == 0) {
             alert("provide all data pls");
-            document.getElementById("name").focus();
+            return false;
+        } else if (!isNaN(name) || !isNaN(location)) {
+            alert("name or location typed wrong")
             return false;
         } else {
-            let name = document.getElementById("name").value;
-            let age = document.getElementById("age").value;
-            let location = document.getElementById("location").value;
-            let time = document.getElementById("time").value;
-            let newData = new ExGirlFriend(name, age, location, time);
             exGirlFriendList.push(newData);
             display(exGirlFriendList);
         }
-
-
         document.getElementById("name").value = "";
         document.getElementById("age").value = "";
         document.getElementById("location").value = "";
         document.getElementById("time").value = 0;
     }
 
+
     function edit(index) {
-        let newName = prompt("insert new name");
-        let newAge = prompt("insert new age");
-        let newLocation = prompt("insert new location");
-        let newTime = prompt("insert new time");
-        if (newName == ""||newAge==""||newLocation==""||newTime=="") {
-            alert("input data pls")
+        let newName = prompt("insert new ex's name");
+        let newAge = parseFloat(prompt("insert new ex's age"));
+        let newLocation = prompt("insert new ex's location");
+        let newTime = prompt("how many time did we meet?");
+
+        if (newName == "" || newAge == "" || newLocation == "" || newTime == "") {
+            alert("pls provide all data");
+            return false;
+        } else if (!isNaN(newName) || !isNaN(newLocation)) {
+            alert("wrong typed");
+            return false;
         } else {
             exGirlFriendList[index].setName(newName);
             exGirlFriendList[index].setAge(newAge);
@@ -136,17 +150,14 @@
             display(exGirlFriendList);
         }
     }
-
     function del(index) {
-        let conf = confirm("do u want to delete this data" + exGirlFriendList[index].getName());
+        let conf = confirm("do u wanna del this data");
         if (conf) {
             exGirlFriendList.splice(index, 1);
-
         } else {
-            alert("u do not delete this data");
+            alert("u do not del this data")
         }
         display(exGirlFriendList);
-
     }
 
 

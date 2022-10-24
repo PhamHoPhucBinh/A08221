@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bong den</title>
+</head>
+<body>
+<input style="size:300px " id="ID" type="number" placeholder="which lamp do you want to switch?">
+<button type="button" onclick="connect()">Connect</button>
+</br>
+<button type="button" onclick="switch1()">On/Off</button>
+<p id="status"></p>
+
+<script>
+    class Electriclamp {
+        constructor(status) {
+            this.status = status;
+        }
+
+        getStatus() {
+            return this.status;
+        }
+
+        turnOff() {
+            this.status = false;
+        }
+
+        turnOn() {
+            this.status = true;
+        }
+    }
+
+    class SwitchButton {
+        constructor(status, lamp) {
+            this.status = status;
+            this.lamp = lamp;
+        }
+
+        switchOff() {
+            this.status = !this.status;
+            this.lamp.turnOff();
+        }
+
+        switchOn() {
+            this.lamp.status = !this.status;
+            this.lamp.turnOn();
+        }
+
+        connectToLamp(ElectricLamp) {
+            this.lamp = ElectricLamp;
+        }
+    }
+
+    let lampList = [];
+    let lamp1 = new Electriclamp(false);
+    let lamp2 = new Electriclamp(false);
+    lampList.push(lamp1);
+    lampList.push(lamp2);
+    let switchButton = new SwitchButton(false, lampList)
+
+    let lampChoose = 1;
+    let flag = false;
+
+    function connect() {
+
+        lampChoose = document.getElementById("ID").value;
+        flag= lampList[lampChoose - 1].getStatus();
+        // alert(lampChoose);
+        switchButton.connectToLamp(lampList[lampChoose - 1]);
+    }
+
+
+
+    function switch1() {
+        if (flag) {
+            switchButton.switchOff();
+            flag = false;
+
+        } else {
+            switchButton.switchOn();
+            flag = true;
+
+        }
+        console.log(lampList[lampChoose-1].getStatus())
+        document.getElementById("status").innerText = lampList[lampChoose - 1].getStatus();
+    }
+</script>
+</body>
+</html>
